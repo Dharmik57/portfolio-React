@@ -11,39 +11,52 @@ class Contact extends Component {
         super(props);
         this.state={
             validated:false,
-            
+            firstName:'',
+            lastName:''
         }
-        this.handleSubmit = this.handleSubmit.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
     }
-     handleSubmit = (values) => {
-        // console.log('Current State is: ' + JSON.stringify(values));
-        const form = values.currentTarget;
-        if (form.checkValidity() === false) {
-            values.preventDefault();
-            values.stopPropagation();
-        }
 
-        console.log('Submitted'+ values.firstName);
-         alert( 'Submitted');
-        this.setState({ validated: true });
+    onChange = (e) => {
+        /*
+          Because we named the inputs to match their
+          corresponding values in state, it's
+          super easy to update the state
+        */
+        this.setState({ [e.target.name]: e.target.value });
+      }
+
+     handleSubmit = (event) => {    
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        } 
+        
+            console.log('Thank you for submitting : ' + JSON.stringify(this.state));
+            alert('Thank you for submitting : ' + JSON.stringify(this.state));    
+            this.setState({ validated: true, firstName:'',lastName:'' });
+        
+       
       };
       
         render() {
+            const { firstName, lastName } = this.state;
             return (
             <div className="condiv">
                 <h1 className="subtopic">Contact Me</h1>
                 <h5>Email  :   dharmikvalani57@gmail.com</h5>
                 <br></br>
-                <Form noValidate validated={this.state.validated} onSubmit={(values) => this.handleSubmit(values)}>
+                <Form  noValidate validated={this.state.validated} onSubmit={this.handleSubmit}>
                     <Form.Row>
-                            <Form.Group as={Col}  controlId="formfname">
+                            <Form.Group as={Col}  >
                                 <Form.Label>First Name*</Form.Label>
-                                <Form.Control name="firstName" type="text" placeholder="Enter FirstName" required/>
+                                <Form.Control  onChange={this.onChange}  value={firstName} name="firstName" type="text" placeholder="Enter FirstName" required/>
                                 <Form.Control.Feedback  type="invalid">Please Enter Your FirstName</Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group as={Col}  controlId="formlname">
                                 <Form.Label>LastName</Form.Label>
-                                <Form.Control type="text" placeholder="Enter LastName" />
+                                <Form.Control  onChange={this.onChange} value={lastName} name="lastName" type="text" placeholder="Enter LastName" />
                             </Form.Group> 
                     </Form.Row>
                     <Form.Row>
