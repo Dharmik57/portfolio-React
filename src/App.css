@@ -84,7 +84,7 @@ h1,h2,h3,h4,p{
 }
 .social
 {
-  position: absolute;
+  /* position: absolute; */
   margin-top: 20px;
   display: flex;
   bottom: 60px;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactTypingEffect  from 'react-typing-effect';
 import profilepic from '../img/dharmikimg.jpg' ;
 import Social from '../components/Social';
-
+import ProgressBar from 'react-bootstrap/ProgressBar'
 class Home extends Component{
     render(){
         return(
